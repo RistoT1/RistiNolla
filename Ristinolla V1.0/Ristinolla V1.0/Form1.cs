@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -163,7 +163,13 @@ namespace Ristinolla_V1._0
                     winner = true;
                     VuoroL.Text = "Voittaja: " + voittaja;
                     IlmoitusL.Visible = true;
-                } 
+                }
+            }
+            if (winner == false && clickcount == 9)
+            {
+                MessageBox.Show("tasapeli");
+                winner = true;
+                IlmoitusL.Visible = true;
             }
         }
         private void nollaus(object sender, EventArgs e)
@@ -215,11 +221,11 @@ namespace Ristinolla_V1._0
         {
             //hakee kaikki napit
             Button[] buttons = { b0_0, b0_1, b0_2, b1_0, b1_1, b1_2, b2_0, b2_1, b2_2 };
-            if (checkBox_bot.Checked)
+            if (checkBox_bot.Checked && clickcount == 0)
             {
                 botplaying = true;
             }
-            else if (!checkBox_bot.Checked)
+            else if (!checkBox_bot.Checked && clickcount == 0)
             {
                 botplaying = false;
             }
@@ -283,7 +289,7 @@ namespace Ristinolla_V1._0
 
         private void checkBox_botStart_CheckedChanged(object sender, EventArgs e)
         {   //botti aloittaa
-            if (clickcount == 0 && checkBox_botStart.Checked)
+            if (clickcount == 0 && checkBox_botStart.Checked && checkBox_bot.Checked)
             {
                 botTurn = true;
                 checkBox_bot_CheckedChanged(sender, e);
